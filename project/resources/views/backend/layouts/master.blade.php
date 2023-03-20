@@ -42,7 +42,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">NEWS</div>
+                <div class="sidebar-brand-text mx-3">{{ __('nav.news') }}</div>
             </a>
 
             <!-- Divider -->
@@ -52,28 +52,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span> {{ __('nav.dashboard') }} </span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('post.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Post</span></a>
+                    <span>{{__('nav.post')}}</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('about.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>About</span></a>
+                    <span>{{__('nav.about')}}</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('user.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Users</span></a>
+                    <span>{{__('nav.user')}}</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('setting.index') }}">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Setting</span></a>
+                    <span>{{__('nav.setting')}}</span></a>
             </li>
 
             <!-- Divider -->
@@ -109,7 +109,7 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                placeholder={{__('dashboard.search')}} aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -269,23 +269,20 @@
                                 <!-- Counter - Messages -->
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                >
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in">
                                 <h6 class="dropdown-header">
-                                    Language
+                                    {{__('nav.language')}}
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
+                                <ul>
+                                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <li>
+                                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                {{ $properties['native'] }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </li>
 
@@ -399,6 +396,7 @@
 
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         @yield('script')
 
 

@@ -5,18 +5,18 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                Users
-                <a href="{{route('user.create')}}" class="btn btn-success float-right">Add User</a>
+                {{__('user.users')}}
+                <a href="{{route('user.create')}}" class="btn btn-success float-right">{{__('user.add_user')}}</a>
             </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Number</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Image</th>
-                            <th>Action</th>
+                            <th>{{__('user.number')}}</th>
+                            <th>{{__('user.name')}}</th>
+                            <th>{{__('user.email')}}</th>
+                            <th>{{__('user.image')}}</th>
+                            <th>{{__('user.action')}}</th>
                         </tr>
                     </thead>
                     <tbody>

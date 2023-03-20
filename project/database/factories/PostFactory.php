@@ -21,6 +21,7 @@ class PostFactory extends Factory
             'sub_title' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'slug' => Str::slug(fake()->sentence())
+            
         ];
     }
 }

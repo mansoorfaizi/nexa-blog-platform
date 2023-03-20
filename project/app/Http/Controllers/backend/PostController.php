@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Str;
 
@@ -18,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         return view('backend.post.index')
-            ->with('posts', Post::where('lang', app()->getLocale())->paginate(10));
+            ->with('posts', Post::where('lang', app()->getLocale())->paginate(5));
     }
 
     /**
@@ -44,8 +45,8 @@ class PostController extends Controller
             'sub_title'=>'required|max:50',
             'description'=>'required'
         ]);
-
-       Post::create(['title'=>$request->title, 'sub_title'=>$request->sub_title, 'description'=>$request->description, 'slug'=>Str::slug($request->title), 'lang'=>app()->getLocale()]);
+       
+       Post::create(['title'=>$request->title, 'sub_title'=>$request->sub_title, 'description'=>$request->description, 'slug'=>Str::slug($request->title), 'lang'=>app()->getLocale(), 'profile_id'=>Auth::user()->profile->id]);
        Session::flash('success', 'Create Successfully');
         
        return redirect()->route('post.index');

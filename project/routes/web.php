@@ -11,6 +11,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Mcamara\LaravelLocalization\LaravelLocalization as LaravelLocalizationLaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,60 @@ Route::middleware('auth')->group(function () {
     Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
     Route::post('setting', [SettingController::class, 'store'])->name('setting.store');
 });
+
+
+
+
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+        Route::middleware('auth')->group(function () {
+
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+            Route::resource('post', PostController::class);
+            Route::get('trash', [PostController::class, 'trash'])->name('post.trash');
+            Route::get('force-delete/{id}', [PostController::class, 'delete'])->name('post.force-delete');
+            Route::get('restore/{id}', [PostController::class, 'restore'])->name('post.restore');
+
+            Route::get('admin/about', [AboutController::class, 'index'])->name('about.index');
+            Route::post('admin/about', [AboutController::class, 'store'])->name('about.store');
+
+            Route::resource('user', UserController::class);
+
+            Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+            Route::post('setting', [SettingController::class, 'store'])->name('setting.store');
+        });
+    }
+);
+
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::resource('post', PostController::class);
+    Route::get('trash', [PostController::class, 'trash'])->name('post.trash');
+    Route::get('force-delete/{id}', [PostController::class, 'delete'])->name('post.force-delete');
+    Route::get('restore/{id}', [PostController::class, 'restore'])->name('post.restore');
+
+    Route::get('admin/about', [AboutController::class, 'index'])->name('about.index');
+    Route::post('admin/about', [AboutController::class, 'store'])->name('about.store');
+
+    Route::resource('user', UserController::class);
+
+    Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('setting', [SettingController::class, 'store'])->name('setting.store');
+});
+
+
+
+
+
 
 
 

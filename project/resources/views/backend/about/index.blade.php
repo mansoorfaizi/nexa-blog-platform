@@ -5,13 +5,13 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                About
+                {{__('about.about')}}
             </div>
             <div class="card-body">
                 <form action="{{ route('about.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="title">Title</label>
+                        <label for="title">{{__('about.title')}}</label>
                         <input type="text" name="title" class="form-control" value="{{ $about->title }}"
                             placeholder="Enter the about title">
                         @error('title')
@@ -19,7 +19,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="subTitle">SubTitle</label>
+                        <label for="subTitle">{{__('about.sub_title')}}</label>
                         <input type="text" name="sub_title" class="form-control" value="{{ $about->sub_title }}"
                             placeholder="Enter the about subTitle">
                         @error('sub_title')
@@ -27,14 +27,14 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label for="description">{{__('about.description')}}</label>
                         <textarea name="description" class="form-control my-editor" cols="30" rows="10"
                             placeholder="Enter the about description">{{ $about->description }}</textarea>
                         @error('description')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success">{{__('about.save')}}</button>
                 </form>
             </div>
         </div>

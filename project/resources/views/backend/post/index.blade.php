@@ -5,28 +5,30 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                Posts
-                <a href="{{ route('post.create') }}" class="btn btn-success float-right">Add Post</a>
+            {{__('post.posts')}}
+                <a href="{{ route('post.create') }}" class="btn btn-success float-right">{{__('post.add_post')}}</a>
                 <br>
                 <br>
-                <a href="{{ route('post.trash') }}" class="btn btn-danger float-right">Trash</a>
+                <a href="{{ route('post.trash') }}" class="btn btn-danger float-right">{{__('post.trash')}}</a>
             </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Number</th>
-                            <th>Title</th>
-                            <th>SubTitle</th>
-                            <th>Action</th>
+                            <th>{{__('post.number')}}</th>
+                            <th>{{__('post.title')}}</th>
+                            <th>{{__('post.sub_title')}}</th>
+                            <th>{{__('post.author')}}</th>
+                            <th>{{__('post.action')}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($posts as $index => $post)
                             <tr>
-                                <td>{{ $posts->currentPage() * 10 - 10 + $index + 1 }}</td>
+                                <td> {{ $posts->currentPage() * 10 - 10 + $index + 1 }}</td>
                                 <td> {{ $post->title }} </td>
                                 <td> {{ $post->sub_title }} </td>
+                                <th> {{ $post->profile->user->name }}</th>
                                 <td>
                                     <a href="#" class="delete" id="{{ $post->id }}"><i
                                             class="fa fa-trash"></i></a>|
